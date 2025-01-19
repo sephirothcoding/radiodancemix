@@ -127,26 +127,16 @@
       let isPlaying = false;
       let isMuted = false;
 
-      // Start playing the audio immediately after page load (auto-start)
-      audio.play().then(() => {
-        playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/pause--v1.png')";
-        isPlaying = true;
-      }).catch((err) => {
-        console.error("Eroare la pornirea audio:", err);
-        playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/play--v1.png')";
-        isPlaying = false;
-      });
-
       // Function to toggle play/pause
       playBtn.addEventListener("click", function() {
-        isPlaying = !isPlaying;
         if (isPlaying) {
-          playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/pause--v1.png')";
-          audio.play();
-        } else {
           playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/play--v1.png')";
           audio.pause();
+        } else {
+          playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/pause--v1.png')";
+          audio.play();
         }
+        isPlaying = !isPlaying;
       });
 
       // Function to toggle mute/unmute

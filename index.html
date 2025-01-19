@@ -162,14 +162,22 @@
         fetch("https://s3.slotex.pl:7468/stats?json=1") // URL corect pentru SHOUTcast
           .then(response => response.json())
           .then(data => {
-            const listenersCount = data.listeners || 0;
-            listenersCountElement.textContent = `Listeners: ${listenersCount}`;
+            if (data && data.listeners !== undefined) {
+              const listenersCount = data.listeners || 0;
+              listenersCountElement.textContent = `Listeners: ${listenersCount}`;
+            } else {
+              listenersCountElement.textContent = "Listeners: Data unavailable";
+            }
           })
           .catch(error => {
             console.error("Eroare la obținerea numărului de ascultători:", error);
             listenersCountElement.textContent = "Listeners: Error";
           });
       }
+
+      // Start the radio automatically on page load
+      audio.autoplay = true;
+      audio.play();
 
       // Update listeners count every 10 seconds
       setInterval(updateListeners, 10000);

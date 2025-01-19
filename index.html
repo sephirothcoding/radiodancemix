@@ -77,21 +77,6 @@
       margin-top: 10px;
     }
 
-    .radio-info {
-      position: absolute;
-      top: 65%;
-      right: 25px;
-      color: #ff1493;
-      text-align: right;
-      z-index: 2;
-    }
-
-    .listeners-count {
-      font-size: 16px;
-      margin: 0;
-      color: #f0bef8;
-    }
-
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -105,9 +90,6 @@
 <body>
   <div class="hexagon-container">
     <div class="hexagon-radio">
-      <div class="radio-info">
-        <div class="listeners-count" id="listeners-count">Listeners: Loading...</div>
-      </div>
       <div class="controls">
         <button class="play-btn"></button>
         <button class="volume-btn"></button>
@@ -122,7 +104,6 @@
       const playBtn = document.querySelector(".play-btn");
       const volumeBtn = document.querySelector(".volume-btn");
       const volumeSlider = document.querySelector(".volume-slider");
-      const listenersCountElement = document.getElementById("listeners-count");
 
       let isPlaying = false;
       let isMuted = false;
@@ -157,31 +138,9 @@
         audio.volume = volumeValue / 100;
       });
 
-      // Function to fetch the number of listeners (SHOUTcast example)
-      function updateListeners() {
-        fetch("https://s3.slotex.pl:7468/stats?json=1") // URL corect pentru SHOUTcast
-          .then(response => response.json())
-          .then(data => {
-            if (data && data.listeners !== undefined) {
-              const listenersCount = data.listeners || 0;
-              listenersCountElement.textContent = `Listeners: ${listenersCount}`;
-            } else {
-              listenersCountElement.textContent = "Listeners: Data unavailable";
-            }
-          })
-          .catch(error => {
-            console.error("Eroare la obținerea numărului de ascultători:", error);
-            listenersCountElement.textContent = "Listeners: Error";
-          });
-      }
-
       // Start the radio automatically on page load
       audio.autoplay = true;
       audio.play();
-
-      // Update listeners count every 10 seconds
-      setInterval(updateListeners, 10000);
-      updateListeners(); // Initial call to get the listeners count
     });
   </script>
 </body>

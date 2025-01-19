@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hexagon Radio Player</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: transparent;
+      font-family: Arial, sans-serif;
+    }
+
+    .hexagon-container {
+      width: 500px;
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hexagon-radio {
+      width: 100%;
+      height: 100%;
+      background-image: url('https://xatimg.com/image/V3Rxr66n8slA.png');
+      background-size: cover;
+      background-position: center;
+      position: absolute;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .hexagon-container:hover .hexagon-radio {
+      transform: scale(1.05);
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 80px; /* Mutat mai sus */
+      left: 50%;
+      transform: translateX(-50%);
+      color: #e35515; /* Roz */
+      text-align: center;
+      z-index: 2;
+    }
+
+    .play-btn, .volume-btn {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 182, 193, 0.8); /* Roz, RGB */
+      border: none;
+      margin: 0 5px;
+      cursor: pointer;
+      background-size: 100% 100%;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .play-btn:hover, .volume-btn:hover {
+      transform: scale(1.1);
+      background-color: rgba(255, 182, 193, 1); /* Roz, RGB */
+    }
+
+    .volume-btn {
+      background-image: url("https://img.icons8.com/material-sharp/24/000000/speaker.png");
+    }
+
+    .play-btn {
+      background-image: url("https://img.icons8.com/material-sharp/24/000000/play--v1.png");
+    }
+
+    .volume-slider {
+      width: 100px;
+      margin-top: 10px;
+    }
+
+    .radio-info {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .radio-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+      color: #e35515; /* Roz */
+    }
+
+    .listeners-count {
+      font-size: 16px;
+      margin: 5px 0 0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hexagon-container">
+    <div class="hexagon-radio">
+      <div class="radio-info">
+        <div class="radio-title">Radio Dance MaxMusic</div> <!-- Schimbare de nume -->
+        <div class="listeners-count">Listeners: 125</div>
+      </div>
+      <div class="controls">
+        <button class="play-btn"></button>
+        <button class="volume-btn"></button>
+        <input type="range" class="volume-slider" min="0" max="100" value="50">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const audio = new Audio("https://boxstream.danceradiouk.com/stream/1/");
+      const playBtn = document.querySelector(".play-btn");
+      const volumeBtn = document.querySelector(".volume-btn");
+      const volumeSlider = document.querySelector(".volume-slider");
+
+      let isPlaying = false;
+      let isMuted = false;
+
+      // Function to toggle play/pause
+      playBtn.addEventListener("click", function() {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/pause--v1.png')";
+          audio.play();
+        } else {
+          playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/play--v1.png')";
+          audio.pause();
+        }
+      });
+
+      // Function to toggle mute/unmute
+      volumeBtn.addEventListener("click", function() {
+        isMuted = !isMuted;
+        if (isMuted) {
+          volumeBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/mute.png')";
+          audio.muted = true;
+        } else {
+          volumeBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/speaker.png')";
+          audio.muted = false;
+        }
+      });
+
+      // Function to update volume
+      volumeSlider.addEventListener("input", function() {
+        const volumeValue = volumeSlider.value;
+        audio.volume = volumeValue / 100;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -106,7 +106,7 @@
   <div class="hexagon-container">
     <div class="hexagon-radio">
       <div class="radio-info">
-        <div class="listeners-count">Listeners: 125</div>
+        <div class="listeners-count" id="listeners-count">Listeners: Loading...</div>
       </div>
       <div class="controls">
         <button class="play-btn"></button>
@@ -119,12 +119,18 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const audio = new Audio("https://s3.slotex.pl:7468/stream/1/?sid=1"); // Link stream
+      audio.autoplay = true; // Auto-start
+
       const playBtn = document.querySelector(".play-btn");
       const volumeBtn = document.querySelector(".volume-btn");
       const volumeSlider = document.querySelector(".volume-slider");
+      const listenersCountElement = document.getElementById("listeners-count");
 
       let isPlaying = false;
       let isMuted = false;
+
+      // Auto play the radio when page loads
+      audio.play();
 
       // Function to toggle play/pause
       playBtn.addEventListener("click", function() {
@@ -155,6 +161,24 @@
         const volumeValue = volumeSlider.value;
         audio.volume = volumeValue / 100;
       });
+
+      // Function to fetch the number of listeners (example with a placeholder API)
+      function updateListeners() {
+        fetch("https://your-api-endpoint.com/listeners") // Înlocuiește cu API-ul real
+          .then(response => response.json())
+          .then(data => {
+            const listenersCount = data.listeners || 0;
+            listenersCountElement.textContent = `Listeners: ${listenersCount}`;
+          })
+          .catch(error => {
+            console.error("Eroare la obținerea numărului de ascultători:", error);
+            listenersCountElement.textContent = "Listeners: Error";
+          });
+      }
+
+      // Update listeners count every 10 seconds
+      setInterval(updateListeners, 10000);
+      updateListeners(); // Initial call to get the listeners count
     });
   </script>
 </body>

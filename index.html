@@ -162,12 +162,12 @@
         audio.volume = volumeValue / 100;
       });
 
-      // Function to fetch the number of listeners (example with a placeholder API)
+      // Function to fetch the number of listeners (SHOUTcast example)
       function updateListeners() {
-        fetch("https://your-api-endpoint.com/listeners") // Înlocuiește cu API-ul real
+        fetch("https://your-shoutcast-server.com:port/stats?json=1") // Înlocuiește cu URL-ul corect
           .then(response => response.json())
           .then(data => {
-            const listenersCount = data.listeners || 0;
+            const listenersCount = data listeners || 0;
             listenersCountElement.textContent = `Listeners: ${listenersCount}`;
           })
           .catch(error => {

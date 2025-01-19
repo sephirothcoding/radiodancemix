@@ -119,8 +119,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const audio = new Audio("https://s3.slotex.pl:7468/stream/1/?sid=1"); // Link stream
-      audio.autoplay = true; // Auto-start
-
       const playBtn = document.querySelector(".play-btn");
       const volumeBtn = document.querySelector(".volume-btn");
       const volumeSlider = document.querySelector(".volume-slider");
@@ -129,8 +127,15 @@
       let isPlaying = false;
       let isMuted = false;
 
-      // Auto play the radio when page loads
-      audio.play();
+      // Start playing the audio immediately after page load (auto-start)
+      audio.play().then(() => {
+        playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/pause--v1.png')";
+        isPlaying = true;
+      }).catch((err) => {
+        console.error("Eroare la pornirea audio:", err);
+        playBtn.style.backgroundImage = "url('https://img.icons8.com/material-sharp/24/000000/play--v1.png')";
+        isPlaying = false;
+      });
 
       // Function to toggle play/pause
       playBtn.addEventListener("click", function() {
@@ -167,7 +172,7 @@
         fetch("https://your-shoutcast-server.com:port/stats?json=1") // Înlocuiește cu URL-ul corect
           .then(response => response.json())
           .then(data => {
-            const listenersCount = data listeners || 0;
+            const listenersCount = data.listeners || 0;
             listenersCountElement.textContent = `Listeners: ${listenersCount}`;
           })
           .catch(error => {

@@ -26,7 +26,7 @@
     .hexagon-radio {
       width: 100%;
       height: 100%;
-      background-image: url('https://xatimg.com/image/DTc3hleKRxyk.png'); /* Imagine fundal */
+      background-image: url('https://xatimg.com/image/DTc3hleKRxyk.png');
       background-size: cover;
       background-position: center;
       position: absolute;
@@ -43,7 +43,7 @@
       bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
-      color: #ff1493; /* Roz închis */
+      color: #ff1493;
       text-align: center;
       z-index: 2;
     }
@@ -51,7 +51,7 @@
     .play-btn, .volume-btn {
       width: 40px;
       height: 40px;
-      background-color: rgba(255, 182, 193, 0.8); /* Roz deschis */
+      background-color: rgba(255, 182, 193, 0.8);
       border: none;
       margin: 0 5px;
       cursor: pointer;
@@ -61,7 +61,7 @@
 
     .play-btn:hover, .volume-btn:hover {
       transform: scale(1.1);
-      background-color: rgba(255, 182, 193, 1); /* Roz deschis */
+      background-color: rgba(255, 182, 193, 1);
     }
 
     .volume-btn {
@@ -79,9 +79,9 @@
 
     .radio-info {
       position: absolute;
-      top: 65%; /* Coborât cu 10px */
-      right: 25px; /* Margine de 25px față de dreapta */
-      color: #ff1493; /* Roz închis */
+      top: 65%;
+      right: 25px;
+      color: #ff1493;
       text-align: right;
       z-index: 2;
     }
@@ -89,7 +89,7 @@
     .listeners-count {
       font-size: 16px;
       margin: 0;
-      color: #f0bef8; /* Culoare text Listeners */
+      color: #f0bef8;
     }
 
     @keyframes fadeIn {
@@ -118,7 +118,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const audio = new Audio("https://s3.slotex.pl:7468/stream/1/?sid=1"); // Link stream
+      const audio = new Audio("https://s3.slotex.pl:7468/stream/1/?sid=1");
       const playBtn = document.querySelector(".play-btn");
       const volumeBtn = document.querySelector(".volume-btn");
       const volumeSlider = document.querySelector(".volume-slider");
@@ -159,7 +159,7 @@
 
       // Function to fetch the number of listeners (SHOUTcast example)
       function updateListeners() {
-        fetch("https://your-shoutcast-server.com:port/stats?json=1") // Înlocuiește cu URL-ul corect
+        fetch("https://s3.slotex.pl:7468/stats?json=1") // URL corect pentru SHOUTcast
           .then(response => response.json())
           .then(data => {
             const listenersCount = data.listeners || 0;

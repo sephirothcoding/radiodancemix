@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hexagon Radio Player</title>
+  <title>Radio Dance MaxMusic</title>
   <style>
     body {
       display: flex;
@@ -40,10 +40,10 @@
 
     .controls {
       position: absolute;
-      bottom: 80px; /* Mutat mai sus */
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
-      color: #e35515; /* Roz */
+      color: #ff1493; /* Roz închis */
       text-align: center;
       z-index: 2;
     }
@@ -51,7 +51,7 @@
     .play-btn, .volume-btn {
       width: 40px;
       height: 40px;
-      background-color: rgba(255, 182, 193, 0.8); /* Roz, RGB */
+      background-color: rgba(255, 182, 193, 0.8); /* Roz deschis */
       border: none;
       margin: 0 5px;
       cursor: pointer;
@@ -61,7 +61,7 @@
 
     .play-btn:hover, .volume-btn:hover {
       transform: scale(1.1);
-      background-color: rgba(255, 182, 193, 1); /* Roz, RGB */
+      background-color: rgba(255, 182, 193, 1); /* Roz deschis */
     }
 
     .volume-btn {
@@ -79,10 +79,10 @@
 
     .radio-info {
       position: absolute;
-      top: 20px;
+      top: 60%; /* Coborât mai jos */
       left: 50%;
       transform: translateX(-50%);
-      color: #fff;
+      color: #ff1493; /* Roz închis */
       text-align: center;
       z-index: 2;
     }
@@ -91,7 +91,6 @@
       font-size: 24px;
       font-weight: bold;
       margin: 0;
-      color: #e35515; /* Roz */
     }
 
     .listeners-count {
@@ -113,7 +112,7 @@
   <div class="hexagon-container">
     <div class="hexagon-radio">
       <div class="radio-info">
-        <div class="radio-title">Radio Dance MaxMusic</div> <!-- Schimbare de nume -->
+        <div class="radio-title">Radio Dance MaxMusic</div>
         <div class="listeners-count">Listeners: 125</div>
       </div>
       <div class="controls">
@@ -126,7 +125,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const audio = new Audio("https://boxstream.danceradiouk.com/stream/1/");
+      const audio = new Audio("https://s3.slotex.pl:7468/stream/1/?sid=1"); // Link nou
       const playBtn = document.querySelector(".play-btn");
       const volumeBtn = document.querySelector(".volume-btn");
       const volumeSlider = document.querySelector(".volume-slider");
